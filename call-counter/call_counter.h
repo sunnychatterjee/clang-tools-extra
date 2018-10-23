@@ -3,6 +3,8 @@
 #include "clang/AST/RecursiveASTVisitor.h"
 #include "clang/Frontend/FrontendActions.h"
 
+#pragma once
+
 using namespace clang;
 
 namespace CallCounter

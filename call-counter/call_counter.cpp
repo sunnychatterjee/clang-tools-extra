@@ -4,7 +4,7 @@
 #include <iostream>
 #include <Windows.h>
 
-#define DEBUG 1
+extern bool g_isVerbose;
 
 namespace
 {
@@ -229,17 +229,18 @@ namespace
         const auto callName = RemoveTemplates(info.function->getNameInfo().getAsString());
         const auto containingFuncName = RemoveTemplates(info.containingFunc->getQualifiedNameAsString());
 
-#if DEBUG
-        llvm::outs() << fileName << ","
-            << containingFuncName << ","
-            << owningTypeName << ","
-            << callName << ","
-            << info.line << ","
-            << (info.usedInBranch ? "1" : "0") << ","
-            << (info.usedInLoop ? "1" : "0");
+        if (::g_isVerbose)
+        {
+            llvm::outs() << fileName << ","
+                << containingFuncName << ","
+                << owningTypeName << ","
+                << callName << ","
+                << info.line << ","
+                << (info.usedInBranch ? "1" : "0") << ","
+                << (info.usedInLoop ? "1" : "0");
 
-        llvm::outs() << "\n";
-#endif // DEBUG
+            llvm::outs() << "\n";
+        }
 
         out << fileName << ","
             << containingFuncName << ","

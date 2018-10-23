@@ -15,13 +15,17 @@ using namespace llvm;
 using namespace clang::tooling;
 
 // Set up the command line options
+static cl::OptionCategory call_counter_category("call-counter options");
 static cl::extrahelp common_help(CommonOptionsParser::HelpMessage);
 static cl::extrahelp MoreHelp("\nThis is a clang based tool which collects information about called functions in a C++ program.\n");
-static cl::OptionCategory call_counter_category("call-counter options");
+static cl::opt<bool> Verbose("verbose");
+
+bool g_isVerbose = false;
 
 int main(int argc, const char **argv)
 {
     CommonOptionsParser optionsParser(argc, argv, call_counter_category);
+    g_isVerbose = Verbose.getValue();
 
     ClangTool tool(
         optionsParser.getCompilations(),    // Causes annoying warning, we have to use -- on command line
