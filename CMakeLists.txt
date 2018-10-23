@@ -1,3 +1,4 @@
+add_subdirectory(call-counter)
 add_subdirectory(clang-apply-replacements)
 add_subdirectory(clang-reorder-fields)
 add_subdirectory(modularize)
